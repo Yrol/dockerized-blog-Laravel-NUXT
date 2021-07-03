@@ -2,9 +2,9 @@
 
 Dockerized blog consist of both backend and frontend created using Laravel, Tailwind, Nuxt and MySQL. This project is a combination of following 3 projects.
 
-[Nuxt blog client](https://github.com/Yrol/blog-client)
-[Laravel blog backend](https://github.com/Yrol/Laravel-nuxt-blog)
-[Dockerized template for Laravel and NUXT](https://github.com/Yrol/Docker-Laravel-Nuxt)
+- [Nuxt blog client](https://github.com/Yrol/blog-client)
+- [Laravel blog backend](https://github.com/Yrol/Laravel-nuxt-blog)
+- [Dockerized template for Laravel and NUXT](https://github.com/Yrol/Docker-Laravel-Nuxt)
 
 ## Features
 
