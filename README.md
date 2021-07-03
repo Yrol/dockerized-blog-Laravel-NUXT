@@ -14,7 +14,7 @@ Once the project is [set up](#installation) successfully, you should be able to 
 
   - View all articles: [http://localhost:8080/](http://localhost:8080/)
   - View a single article: `http://localhost:8080/posts/<article-name>`
-  - Pagination:
+  - Pagination: `http://localhost:8080/posts/page/<page-number>`
   - View articles by category: `http://localhost:8080/categories/<category-name>`
 
 - Categories

@@ -41,9 +41,6 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/
 RUN docker-php-ext-install gd
 
-# PostgreSQL
-RUN apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
-
 # BC Math
 RUN docker-php-ext-install bcmath
 
