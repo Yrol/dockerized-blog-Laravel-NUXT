@@ -1,0 +1,36 @@
+{
+  "name": "clear",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --max-old-space-size=8192 node_modules/nuxt/bin/nuxt.js",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-regular-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "dotenv": "^8.2.0",
+    "jquery": "^3.5.1",
+    "moment": "^2.29.1",
+    "node-sass": "^4.14.1",
+    "nuxt": "^2.14.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "nuxt-tailvue": "^1.0.52",
+    "sass-loader": "^10.0.1",
+    "vee-validate": "^3.3.9",
+    "vue2-editor": "2.8.1",
+    "vuejs-datepicker": "^1.6.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^3.3.3"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}
