@@ -1,4 +1,56 @@
-## Dockerized template for Laravel and NUXT applications.
+## Dockerized blog
+
+Dockerized blog consist of both backend and frontend created using Laravel, Tailwind, Nuxt and MySQL. This project is a combination of following 3 projects.
+
+[Nuxt blog client](https://github.com/Yrol/blog-client)
+[Laravel blog backend](https://github.com/Yrol/Laravel-nuxt-blog)
+[Dockerized template for Laravel and NUXT](https://github.com/Yrol/Docker-Laravel-Nuxt)
+
+## Features
+
+Once the project is [set up](#installation) successfully, you should be able to use the following features.
+
+- Articles
+
+  - View all articles: [http://localhost:8080/](http://localhost:8080/)
+  - View a single article: `http://localhost:8080/posts/<article-name>`
+  - Pagination:
+  - View articles by category: `http://localhost:8080/categories/<category-name>`
+
+- Categories
+
+  - View all categories: [http://localhost:8080/categories/](http://localhost:8080/categories/)
+
+- User login: [http://localhost:8080/mystery](http://localhost:8080/mystery)
+  The seedings (`db-seed` run during installation) will add mock users to the DB and the default password for each user is "password". For instance, you should be able login using the credentials as below.
+
+  ```
+  email: winfield12@example.net
+  password: password
+  ```
+
+- Main admin panel: [http://localhost:8080/admin](http://localhost:8080/admin)
+
+  - View all posts: [http://localhost:8080/admin/posts/page/1](http://localhost:8080/admin/posts/page/1)
+  - View all categories: [http://localhost:8080/admin/categories](http://localhost:8080/admin/categories)
+
+- Articles (Admin)
+
+  - Add new article: [http://localhost:8080/admin/new-post](http://localhost:8080/admin/new-post)
+  - Edit article: Option available via each article card.
+  - Delete article: Option available via each article card.
+  - Unpublish article: Option available through each article card.
+
+- Categories (Admin)
+
+  - Add, Edit and Delete categories: [http://localhost:8080/admin/categories](http://localhost:8080/admin/categories)
+
+- Settings: [http://localhost:8080/admin/settings](http://localhost:8080/admin/settings)
+  This will allow you to add Key & Value pairs that can be used across the application. For instance, we can use the credentials like below to upload images to [https://imgur.com/](imgur) via its APIs (currently being used in `ImageUploadController.php`).
+  ```
+  Key: imgur
+  Value: cd6b3f7821exyz
+  ```
 
 ## Outline
 
@@ -21,14 +73,15 @@ This build consist of following.
 - [Database](#database)
 - [Redis](#redis)
 - [Mailhog](#mailhog)
+- [MailTrap](#mailtrap)
 - [Logs](#logs)
 - [Running commands](#running-commands-from-containers)
 
 ## Stack
 
-- Laravel - (will install latest version automatically)
-- Nuxt.JS - (will install latest version automatically)
-- PostgreSQL 13.2
+- Laravel - 7.26.1
+- Nuxt.JS - 2.14.0
+- MySQL - Ver 14.14 Distrib 5.7.29
 - Nginx 1.18.0
 - Redis 6.2
 - Supervisor (queues, schedule commands & etc)
@@ -48,11 +101,11 @@ Both Laravel and Nuxt projects are completely decoupled from each other. Therefo
 **1. Clone or download the repository and enter the project directory**
 
 ```
-git clone git@github.com:Yrol/Docker-Laravel-Nuxt.git app
+git clone git@github.com:Yrol/dockerized-blog.git
 cd app
 ```
 
-**2. Run the installation script (this might take a while depending on network and )**
+**2. Run the installation script (this might take a while depending on network)**
 
 ```
 make install
@@ -250,13 +303,13 @@ It helps to execute commands from different containers a bit simpler:
 For example, instead of
 
 ```
-docker-compose exec postgres pg_dump
+docker-compose exec mysql mysqldump
 ```
 
 You can use the alias `from`:
 
 ```
-from postgres pg_dump
+from mysql mysqldump
 ```
 
 `artisan` alias
@@ -275,39 +328,23 @@ artisan make:model Post
 
 ## Database
 
-In order to connect to PostgreSQL database from an external tool, for example _Sequel Pro_ or _Navicat_, use the following parameters
+In order to connect to MySQL database from an external tool, for example _Sequel Pro_ or _Navicat_, use the following parameters
 
 ```
 HOST: localhost
-PORT: 54321
-DB: app
-USER: app
-PASSWORD: app
+PORT: 3306
+DB: homestead
+USER: homestead
+PASSWORD: homestead
 ```
 
-Also, you can connect to DB with CLI using docker container:
+If you want to dump MySQL data, use the command
 
 ```
-// Connect to container bash cli
-docker-compose exec postgres bash
-    // Then connect to DB cli
-    psql -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+make db-dump-mysql
 ```
 
-For example, if you want to export dump file, use the command
-
-```
-docker-compose exec postgres pg_dump ${POSTGRES_USER} -d ${POSTGRES_DB} > docker/postgres/dumps/dump.sql
-```
-
-To import file into the database, put your file to docker/postgres/dumps folder, it mounts into /tmp folder inside container
-
-```
-// Connect to container bash cli
-docker-compose exec postgres bash
-    // Then connect to DB cli
-    psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} < /tmp/dump.sql
-```
+The above all dump the latest MySQL data to `docker/mysql/dumps/`
 
 ## Redis
 
@@ -323,6 +360,15 @@ If you want to connect with external GUI tool, use the port `54321`
 
 To check how all sent mail look, go to [http://localhost:8026](http://localhost:8026).
 It is the test mail catcher tool for SMTP testing. All sent mails will be stored here.
+
+## Mailtrap
+
+Backend has also been configured to use MailTrap. The following fields can be configured for this in `api/.env`.
+
+```
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+```
 
 ## Logs
 
