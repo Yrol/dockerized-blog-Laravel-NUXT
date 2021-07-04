@@ -6,10 +6,12 @@ USER node
 # Set up work directory
 WORKDIR /var/www/client
 
-RUN npm install
 
 # Configure host
 ENV HOST 0.0.0.0
 
-# Init command
-CMD ["sh", "-c", "npm run dev"]
+# Prod
+# CMD ["sh", "-c", "npm install && npm run build && npm run start"]
+
+# Dev
+CMD ["sh", "-c", "npm install && npm run"]
