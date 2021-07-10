@@ -11,7 +11,7 @@ WORKDIR /var/www/client
 ENV HOST 0.0.0.0
 
 # Prod
-# CMD ["sh", "-c", "npm install && npm run build && npm run start"]
+#CMD ["sh", "-c", "npm install && npm run build && npm run start"]
 
 # Dev
-CMD ["sh", "-c", "npm install && npm run"]
+CMD ["sh", "-c", "npm install && npm run dev"]
