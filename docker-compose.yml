@@ -55,6 +55,9 @@ services:
     build:
       context: docker/mysql
       dockerfile: Dockerfile
+    container_name: mysql
+    restart: unless-stopped
+    tty: true #enable CLI/bash interface on the MySQL container
     volumes:
       - mysql:/var/lib/mysql/
       # Temp volume to allow using dumps
@@ -68,6 +71,7 @@ services:
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+      SERVICE_NAME: mysql
 
   # Redis container
   redis:
