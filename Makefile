@@ -79,6 +79,10 @@ db-migrate:
 # Migrate alias
 migrate: db-migrate
 
+# Run fresh migrations
+migrate-refresh:
+	docker-compose exec php php artisan migrate:refresh
+
 # Run migrations rollback
 db-rollback:
 	docker-compose exec php php artisan migrate:rollback
@@ -220,7 +224,7 @@ autoload:
 	docker-compose exec php composer dump-autoload
 
 # Install the environment
-install: build install-laravel env-api migrate db-seed install-nuxt env-client restart
+install: build install-laravel env-api migrate-refresh db-seed install-nuxt env-client restart
 
 
 #-----------------------------------------------------------
@@ -264,7 +268,6 @@ install-nuxt:
 	cp .env.client client/.env
 	docker-compose up -d
 	docker-compose exec client npm info nuxt version
-
 
 #-----------------------------------------------------------
 # Clearing

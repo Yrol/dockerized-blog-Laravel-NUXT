@@ -52,9 +52,7 @@ services:
       - mailhog
 
   mysql:
-    build:
-      context: docker/mysql
-      dockerfile: Dockerfile
+    image: mysql:5.7.29
     container_name: mysql
     restart: unless-stopped
     tty: true #enable CLI/bash interface on the MySQL container
