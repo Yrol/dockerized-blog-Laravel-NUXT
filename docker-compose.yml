@@ -62,16 +62,16 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql/ # this is where the dat will be persisted locally (within the "mysql" directory).
       # Temp volume to allow using dumps
-      - ./docker/mysql/dumps/:/tmp/
+      # - ./docker/mysql/dumps/:/tmp/ # dev only
     ports:
       - "3306:3306"
     expose: #exposing the port to  be used locally (with local MySQL clients such as MySQLWorkbench & ect)
       - "3306"
     environment:
-      MYSQL_DATABASE: homestead
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_HOST: "0.0.0.0"
       SERVICE_NAME: mysql
 

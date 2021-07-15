@@ -197,7 +197,7 @@ tinker:
 
 # Copy the Laravel API environment file
 env-api:
-	cp .env.api api/.env
+	cp .env api/.env
 
 # Copy the NuxtJS environment file
 env-client:
@@ -257,7 +257,7 @@ install-laravel:
 	sudo chown -Rv ${USER} api
 	sudo chmod -R 777 api/bootstrap/cache
 	sudo chmod -R 777 api/storage
-	cp .env.api api/.env
+	cp .env api/.env
 	docker-compose exec php php artisan key:generate --ansi
 	docker-compose exec php php artisan --version
 
