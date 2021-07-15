@@ -51,13 +51,16 @@ services:
       - redis
       - mailhog
 
+  # MySQL container
   mysql:
-    image: mysql:5.7.29
+    build:
+      context: docker/mysql
+      dockerfile: Dockerfile
     container_name: mysql
     restart: unless-stopped
     tty: true #enable CLI/bash interface on the MySQL container
     volumes:
-      - mysql:/var/lib/mysql/
+      - mysql-data:/var/lib/mysql/ # this is where the dat will be persisted locally (within the "mysql" directory).
       # Temp volume to allow using dumps
       - ./docker/mysql/dumps/:/tmp/
     ports:
@@ -69,6 +72,7 @@ services:
       MYSQL_USER: homestead
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: "0.0.0.0"
       SERVICE_NAME: mysql
 
   # Redis container
@@ -100,7 +104,7 @@ services:
 ######### Volumes ###################################
 
 volumes:
-  mysql:
+  mysql-data:
     driver: local
   redis:
     driver: local
