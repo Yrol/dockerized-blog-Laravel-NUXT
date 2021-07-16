@@ -479,7 +479,7 @@ Portainer is a universal container management tool. It works with Kubernetes, Do
 - Once installed successfully, you should be able to access via the URL below.
 
 ```
-http://128.199.141.69:9000/
+http://<your-server-ip>:9000/
 ```
 
 ## Additional information
