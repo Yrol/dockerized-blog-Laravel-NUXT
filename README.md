@@ -464,7 +464,23 @@ http://<your-server-ip>
 http://<your-server-ip>/api
 ```
 
-## using Portainer for container management
+## Using Portainer for container management
+
+Portainer is a universal container management tool. It works with Kubernetes, Docker, Docker Swarm and Azure ACI.
+
+- SSH into your server and run the following commands.
+
+```
+ docker volume create portainer_data
+
+ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+```
+
+- Once installed successfully, you should be able to access via the URL below.
+
+```
+http://128.199.141.69:9000/
+```
 
 ## Additional information
 
