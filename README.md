@@ -398,6 +398,74 @@ docker-compose exec php bash
 docker-compose exec client /bin/sh
 ```
 
+## Deploying the application to a remote server
+
+Follow the steps below for deploying the project to a remote server without a CI/CD pipeline.
+
+- SSH into your remote server.
+- Clone the project to your remote: `git clone https://github.com/Yrol/dockerized-blog.git` (assuming git is installed in your server).
+- Go to the project directory: `cd dockerized-blog`.
+- Change the `API_URL_BROWSER` variable in `.env.client` (root) file to match your server IP as below in order to resolve NUXT routing.
+
+```
+API_URL=http://nginx:80
+API_URL_BROWSER=http://<your-server-ip>
+```
+
+- Make sure to change the MySQL credential in `.env` as desired.
+- Deploy the project: `cd dockerized-blog` and `make install`.
+- Once the project is deployed successfully, you should be able to access the frontend and backend as below.
+
+```
+http://<your-server-ip>:8080
+http://<your-server-ip>:8081
+```
+
+- Adding reverse proxy to the frontend and backend servers.
+
+  - Install Nginx to the server: `sudo apt install nginx`. Once installed, you should be able to see Nginx running in your server when visit `http://<your-server-ip>`
+  - Create the default Nginx file in the server `sudo nano /etc/nginx/sites-available/default`
+  - Add the following server/location blocks to the file created above for frontend and backend respectively.
+
+  ```
+  location / {
+          # First attempt to serve request as file, then
+          # as directory, then fall back to displaying a 404.
+          proxy_pass http://localhost:8080;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+  }
+  ```
+
+  ```
+  location /api {
+          # First attempt to serve request as file, then
+          # as directory, then fall back to displaying a 404.
+          proxy_pass http://localhost:8081;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+  }
+  ```
+
+  - Save and close the file.
+  - Check Nginx config: `sudo nginx -t`
+  - Restart Nginx: `sudo service nginx restart`
+
+- You should now be able to access the frontend and backend using the following URLs
+
+```
+http://<your-server-ip>
+http://<your-server-ip>/api
+```
+
+## using Portainer for container management
+
 ## Additional information
 
 - This template has been tested in Mac OS 10.15. Therefore, make changes to the commands such as `chown` available in `Makefile` depending on your environment.
