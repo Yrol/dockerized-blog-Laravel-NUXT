@@ -400,7 +400,7 @@ docker-compose exec client /bin/sh
 
 ## Deploying the application to a remote server
 
-Follow the steps below for deploying the project to a remote server without a CI/CD pipeline.
+Follow the steps below for deploying the project to a remote server without a CI/CD pipeline. For this particular example, I've used a DigitalOcean Droplet.
 
 - SSH into your remote server.
 - Clone the project to your remote: `git clone https://github.com/Yrol/dockerized-blog.git` (assuming git is installed in your server).
