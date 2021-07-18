@@ -5,6 +5,7 @@
         v-model="proxy"
         useCustomImageHandler
         @imageAdded="handleImageAdded"
+        :editorOptions="editorSettings"
       >
       </vue-editor>
     </client-only>
@@ -14,6 +15,7 @@
 
 <script>
 import agent from '~/api/agent';
+import hljs from 'highlight.js';
 export default {
   name: 'Vue2Editor',
   props: {
@@ -22,6 +24,13 @@ export default {
   data() {
     return {
       proxy: null,
+      editorSettings: {
+        modules: {
+          syntax: {
+            highlight: (text) => hljs.highlightAuto(text).value,
+          },
+        },
+      },
     };
   },
   mounted() {
