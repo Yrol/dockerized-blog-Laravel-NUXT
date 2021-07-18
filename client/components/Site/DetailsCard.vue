@@ -7,10 +7,9 @@
         <div class="text-black font-bold text-xl mb-2">
           <span>{{ articleData.title }}</span>
         </div>
-        <span
-          class="text-grey-darker text-base"
-          v-html="articleData.body"
-        ></span>
+        <span>
+          <Vue2Editor :editMode="false" v-model="articleData.body"
+        /></span>
         <div class="mb-2 mt-2">
           <a
             class="text-sm text-gray-600 p-1 hover:text-black"
@@ -28,7 +27,21 @@
             <p class="text-gray-600">
               Category:
               <span
-                class="text-xs mb-2 font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1"
+                class="
+                  text-xs
+                  mb-2
+                  font-semibold
+                  inline-block
+                  py-1
+                  px-2
+                  uppercase
+                  rounded-full
+                  text-pink-600
+                  bg-pink-200
+                  uppercase
+                  last:mr-0
+                  mr-1
+                "
               >
                 {{ articleData.category.title }}
               </span>
@@ -43,10 +56,22 @@
   </div>
 </template>
 <script>
+import Vue2Editor from '~/components/Input/Vue2Editor';
 export default {
   name: 'DetailsCard',
+  components: {
+    Vue2Editor,
+  },
   props: {
     articleData: {},
   },
 };
 </script>
+<style>
+.ql-editor {
+  padding: 0 !important;
+}
+.ql-snow {
+  border: 0 !important;
+}
+</style>

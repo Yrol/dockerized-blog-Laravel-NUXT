@@ -2,10 +2,17 @@
   <div>
     <client-only>
       <vue-editor
+        v-if="editMode"
         v-model="proxy"
         useCustomImageHandler
         @imageAdded="handleImageAdded"
         :editorOptions="editorSettings"
+      >
+      </vue-editor>
+      <vue-editor
+        v-else
+        v-model="proxy"
+        :editorOptions="editorViewOnlySettings"
       >
       </vue-editor>
     </client-only>
@@ -20,6 +27,10 @@ export default {
   name: 'Vue2Editor',
   props: {
     value: String,
+    editMode: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -29,6 +40,15 @@ export default {
           syntax: {
             highlight: (text) => hljs.highlightAuto(text).value,
           },
+        },
+      },
+      editorViewOnlySettings: {
+        readOnly: true,
+        modules: {
+          syntax: {
+            highlight: (text) => hljs.highlightAuto(text).value,
+          },
+          toolbar: false,
         },
       },
     };
