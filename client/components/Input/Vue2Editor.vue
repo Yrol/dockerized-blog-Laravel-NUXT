@@ -23,6 +23,7 @@
 <script>
 import agent from '~/api/agent';
 import hljs from 'highlight.js';
+import 'highlight.js/styles/gradient-dark.css';
 export default {
   name: 'Vue2Editor',
   props: {

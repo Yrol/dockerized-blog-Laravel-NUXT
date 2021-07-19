@@ -42,8 +42,7 @@ export default {
    ** Global CSS
    */
   css: [
-    "@assets/scss/main.scss",
-    'highlight.js/styles/atom-one-light.css',
+    "@assets/scss/main.scss"
   ],
   /*
    ** Plugins to load before mounting the App
