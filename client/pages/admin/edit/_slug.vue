@@ -14,6 +14,16 @@
             v-model="postTitle"
           ></FormText>
         </div>
+        <div class="min-w-full">
+          <FormTextarea
+            rules="required"
+            v-model="postDesription"
+            name="textarea"
+            label="Post Description"
+            placeholder="Post Description"
+            icon="newspaper"
+          ></FormTextarea>
+        </div>
         <div class="min-w-full my-4">
           <p class="text-sm leading-5 text-gray-700">
             Category:
@@ -24,7 +34,17 @@
         </div>
         <div class="min-w-full">
           <div
-            class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+            class="
+              border-r border-b border-l border-gray-400
+              lg:border-l-0 lg:border-t lg:border-gray-400
+              bg-white
+              rounded-b
+              lg:rounded-b-none lg:rounded-r
+              p-4
+              flex flex-col
+              justify-between
+              leading-normal
+            "
           >
             <div class="mb-8">
               <p class="text-sm text-gray-600 flex items-center">
@@ -72,6 +92,7 @@
 
 <script>
 import FormText from '~/components/Input/FormText';
+import FormTextarea from '~/components/Input/FormTextarea';
 import Button from '~/components/Input/Button';
 import Vue2Editor from '~/components/Input/Vue2Editor';
 import FormCheckbox from '~/components/Input/FormCheckbox';
@@ -89,6 +110,7 @@ export default {
     Button,
     FormCheckbox,
     Vue2Editor,
+    FormTextarea,
   },
   computed: {
     ...mapGetters({
@@ -107,6 +129,7 @@ export default {
     return {
       postBodyRichText: String,
       postTitle: String,
+      postDesription: String,
       postCategory: String,
       postSlug: String,
       postCategoryId: Number,
@@ -126,6 +149,7 @@ export default {
       let formData = {
         title: this.postTitle,
         body: this.postBodyRichText,
+        description: this.postDesription,
         is_live: this.postOptions[0].selected,
         close_to_comment: this.postOptions[1].selected,
         category_id: Number(this.postCategoryId),
@@ -179,6 +203,7 @@ export default {
     let post = this.currentpost(postSlug);
     this.postBodyRichText = post.body;
     this.postTitle = post.title;
+    this.postDesription = post.description;
     this.postCategory = post.category;
     this.postCategoryId = post.category.id;
     this.postSlug = post.slug;

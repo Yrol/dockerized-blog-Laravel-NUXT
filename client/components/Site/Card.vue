@@ -15,7 +15,7 @@
         </div>
         <div
           v-if="dataReady"
-          v-html="getBodyText(postData.body)"
+          v-html="getBodyText(postData.description)"
           class="text-grey-darker text-base"
         ></div>
         <div v-else>
@@ -51,7 +51,21 @@
             <p class="text-gray-600">
               Category:
               <span
-                class="text-xs mb-2 font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1"
+                class="
+                  text-xs
+                  mb-2
+                  font-semibold
+                  inline-block
+                  py-1
+                  px-2
+                  uppercase
+                  rounded-full
+                  text-pink-600
+                  bg-pink-200
+                  uppercase
+                  last:mr-0
+                  mr-1
+                "
               >
                 {{ postData.category.title }}
               </span>
@@ -72,14 +86,32 @@
           </div>
           <div class="text-sm justify-center">
             <p
-              class="text-black mb-3 leading-none w-12 h-2 animate-pulse bg-gray-400"
+              class="
+                text-black
+                mb-3
+                leading-none
+                w-12
+                h-2
+                animate-pulse
+                bg-gray-400
+              "
             ></p>
             <p class="text-grey-dark animate-pulse w-12 h-2 bg-gray-400"></p>
           </div>
         </div>
         <div
           v-if="dataReady && toLocation && postData.slug"
-          class="md:flex flex-wrap md:justify-end md:content-end md:h-16 border-8:transparent w-full md:w-1/2 lg:w-3/4"
+          class="
+            md:flex
+            flex-wrap
+            md:justify-end
+            md:content-end
+            md:h-16
+            border-8:transparent
+            w-full
+            md:w-1/2
+            lg:w-3/4
+          "
         >
           <nuxt-link
             :to="{
@@ -88,7 +120,29 @@
                 slug: postData.slug,
               },
             }"
-            class="bg-blue-900 lg:w-1/4 flex h-10 flex-wrap items-center justify-center text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+            class="
+              bg-blue-900
+              lg:w-1/4
+              flex
+              h-10
+              flex-wrap
+              items-center
+              justify-center
+              text-white
+              active:bg-pink-600
+              font-bold
+              uppercase
+              text-xs
+              px-4
+              py-2
+              rounded-full
+              shadow
+              hover:shadow-md
+              outline-none
+              focus:outline-none
+              mr-1
+              mb-1
+            "
             style="transition: all 0.15s ease"
           >
             <font-awesome-icon

@@ -59,11 +59,12 @@ class ArticleController extends Controller
         $category_id = $request->input('category_id');
 
         $this->validate($request, [
-            'title' => ['required', new UniqueCategoryName($category_id)],
+            'title' => ['required', new UniqueCategoryName($category_id), 'string'],
+            'description' => ['required', 'string'],
             'category_id' => ['required', Rule::exists('categories', 'id')->where(function ($query) use ($category_id) {
                 $query->where('id', $category_id);
             })],
-            'body' => ['required'],
+            'body' => ['required', 'string'],
             'is_live' => ['required', 'boolean'],
             'close_to_comments' => ['required', 'boolean']
         ]);
@@ -87,8 +88,9 @@ class ArticleController extends Controller
         $category_id = $article->category_id;
 
         $this->validate($request, [
-            'title' => ['required', new ExistingArticleUpdate($category_id, $article->id)],
-            'body' => ['required'],
+            'title' => ['required', new ExistingArticleUpdate($category_id, $article->id), 'string'],
+            'description' => ['required', 'string'],
+            'body' => ['required', 'string'],
             'is_live' => ['required', 'boolean'],
             'close_to_comment' => ['required', 'boolean'],
             'tags' => ['nullable']
@@ -96,7 +98,7 @@ class ArticleController extends Controller
 
         //$article->update($request->all());
         //update defined in BaseRepository
-        $resource = $this->articles->update($article->id, $request->only('title', 'body', 'is_live', 'close_to_comment', 'tags'));
+        $resource = $this->articles->update($article->id, $request->only('title', 'body', 'description', 'is_live', 'close_to_comment', 'tags'));
 
         /*
         * retag is a method of Taggable library [/vendor/cviebrock/eloquent-taggable/src/Taggable.php]

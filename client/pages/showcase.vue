@@ -154,7 +154,19 @@
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div
-              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+              class="
+                mx-auto
+                flex-shrink-0 flex
+                items-center
+                justify-center
+                h-12
+                w-12
+                rounded-full
+                bg-red-100
+                sm:mx-0
+                sm:h-10
+                sm:w-10
+              "
             >
               <svg
                 class="h-6 w-6 text-red-600"
@@ -193,7 +205,30 @@
             <button
               @click="modalOk"
               type="button"
-              class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-red-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+              class="
+                inline-flex
+                justify-center
+                w-full
+                rounded-md
+                border border-transparent
+                px-4
+                py-2
+                bg-red-600
+                text-base
+                leading-6
+                font-medium
+                text-white
+                shadow-sm
+                hover:bg-red-500
+                focus:outline-none
+                focus:border-red-700
+                focus:shadow-outline-red
+                transition
+                ease-in-out
+                duration-150
+                sm:text-sm
+                sm:leading-5
+              "
               :class="{ submitting: modalSubmitting }"
             >
               Yes, Proceed
@@ -206,7 +241,30 @@
             <button
               @click="showModal = false"
               type="button"
-              class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-purple-300 focus:shadow-outline-purple transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+              class="
+                inline-flex
+                justify-center
+                w-full
+                rounded-md
+                border border-gray-300
+                px-4
+                py-2
+                bg-white
+                text-base
+                leading-6
+                font-medium
+                text-gray-700
+                shadow-sm
+                hover:text-gray-500
+                focus:outline-none
+                focus:border-purple-300
+                focus:shadow-outline-purple
+                transition
+                ease-in-out
+                duration-150
+                sm:text-sm
+                sm:leading-5
+              "
             >
               No
             </button>
@@ -337,11 +395,11 @@ export default {
       articleData: {
         title:
           'Pariatur quaerat voluptatem et cumque perspiciatis velit architecto.',
-        body:
+        body: "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+        description:
           "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
         category: { title: 'catrgory title' },
-        slug:
-          'pariatur-quaerat-voluptatem-et-cumque-perspiciatis-velit-architecto',
+        slug: 'pariatur-quaerat-voluptatem-et-cumque-perspiciatis-velit-architecto',
         created_at_dates: { created_at: 'Aug 16 2020' },
       },
       categoriesList: [

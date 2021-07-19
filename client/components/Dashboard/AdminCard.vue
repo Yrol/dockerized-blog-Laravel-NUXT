@@ -15,7 +15,7 @@
         </div>
         <span
           v-if="dataReady"
-          v-html="getBodyText(postData.body)"
+          v-html="getBodyText(postData.description)"
           class="text-grey-darker text-base"
         ></span>
         <div v-else>
@@ -51,7 +51,21 @@
             <p class="text-gray-600">
               Category:
               <span
-                class="text-xs mb-2 font-semibold inline-block py-1 px-2 uppercase rounded-full text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1"
+                class="
+                  text-xs
+                  mb-2
+                  font-semibold
+                  inline-block
+                  py-1
+                  px-2
+                  uppercase
+                  rounded-full
+                  text-pink-600
+                  bg-pink-200
+                  uppercase
+                  last:mr-0
+                  mr-1
+                "
               >
                 {{ postData.category.title }}
               </span>
@@ -72,14 +86,32 @@
           </div>
           <div class="text-sm justify-center">
             <p
-              class="text-black mb-3 leading-none w-12 h-2 animate-pulse bg-gray-400"
+              class="
+                text-black
+                mb-3
+                leading-none
+                w-12
+                h-2
+                animate-pulse
+                bg-gray-400
+              "
             ></p>
             <p class="text-grey-dark animate-pulse w-12 h-2 bg-gray-400"></p>
           </div>
         </div>
         <div
           v-if="dataReady"
-          class="md:flex flex-wrap md:justify-end md:content-end md:h-16 border-8:transparent w-full md:w-1/2 lg:w-3/4"
+          class="
+            md:flex
+            flex-wrap
+            md:justify-end
+            md:content-end
+            md:h-16
+            border-8:transparent
+            w-full
+            md:w-1/2
+            lg:w-3/4
+          "
         >
           <Button
             variant="success"

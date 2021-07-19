@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('body');
+            $table->longText('description');
             $table->string('slug'); //slug is the SEO friendly URL spaces replaces by hyphens. ex: test.com/how-are-you. Laravel has in-built generator - str_slug($string)
             $table->string('tags')->nullable();
             $table->boolean('is_live')->default(false);//allow publish and unpublish
