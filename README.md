@@ -419,7 +419,7 @@ API_URL=http://nginx:80
 API_URL_BROWSER=http://wwww.yourdomain.com
 ```
 
-Make sure to do `make nuxt-install` to propagate the changes.
+Make sure to execute `make install-nuxt` to propagate the changes.
 
 - Make sure to change the MySQL credential in `.env` as desired.
 - Deploy the project: `cd dockerized-blog` and `make install`.
