@@ -409,8 +409,17 @@ Follow the steps below for deploying the project to a remote server without a CI
 
 ```
 API_URL=http://nginx:80
-API_URL_BROWSER=http://<your-server-ip>
+API_URL_BROWSER=http://<your-server-ip>:8080
 ```
+
+For registered domains (port is not required and for secured connections use `https`).
+
+```
+API_URL=http://nginx:80
+API_URL_BROWSER=http://wwww.yourdomain.com
+```
+
+Make sure to do `make nuxt-install` to propagate the changes.
 
 - Make sure to change the MySQL credential in `.env` as desired.
 - Deploy the project: `cd dockerized-blog` and `make install`.
@@ -462,6 +471,18 @@ http://<your-server-ip>:8081
 ```
 http://<your-server-ip>
 http://<your-server-ip>/api
+```
+
+## Adding SSL with LetsEncrypt
+
+```
+sudo apt-get install python3-certbot-nginx
+sudo apt-get update
+sudo apt-get install python-certbot-nginx
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+
+# Only valid for 90 days, test the renewal process with
+certbot renew --dry-run
 ```
 
 ## Using Portainer for container management
