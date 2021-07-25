@@ -20,6 +20,16 @@
               ></FormText>
             </div>
             <div class="min-w-full">
+              <FormTextarea
+                rules="required"
+                v-model="postDesription"
+                name="textarea"
+                label="Post Description"
+                placeholder="Post Description"
+                icon="newspaper"
+              ></FormTextarea>
+            </div>
+            <div class="min-w-full">
               <DropDown
                 name="category_id"
                 label="Category"
@@ -33,7 +43,17 @@
             </div>
             <div class="min-w-full">
               <div
-                class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+                class="
+                  border-r border-b border-l border-gray-400
+                  lg:border-l-0 lg:border-t lg:border-gray-400
+                  bg-white
+                  rounded-b
+                  lg:rounded-b-none lg:rounded-r
+                  p-4
+                  flex flex-col
+                  justify-between
+                  leading-normal
+                "
               >
                 <div class="mb-8">
                   <p class="text-sm text-gray-600 flex items-center">
@@ -82,6 +102,7 @@
 </template>
 <script>
 import FormText from '~/components/Input/FormText';
+import FormTextarea from '~/components/Input/FormTextarea';
 import Button from '~/components/Input/Button';
 import Vue2Editor from '~/components/Input/Vue2Editor';
 import FormCheckbox from '~/components/Input/FormCheckbox';
@@ -97,6 +118,7 @@ export default {
   layout: 'adminLayout',
   components: {
     FormText,
+    FormTextarea,
     Button,
     FormCheckbox,
     DropDown,
@@ -107,6 +129,7 @@ export default {
     return {
       richTextContent: '',
       postTitle: '',
+      postDesription: '',
       postCategory: '',
       buttonDisable: false,
       variant: 'success',
@@ -127,6 +150,7 @@ export default {
 
       let formData = {
         title: this.postTitle,
+        description: this.postDesription,
         body: this.richTextContent,
         is_live: this.postOptions[0].selected,
         close_to_comments: this.postOptions[1].selected,
@@ -180,6 +204,7 @@ export default {
     clearPostData() {
       this.richTextContent = '';
       this.postTitle = '';
+      this.postDesription = '';
       this.$refs.postForm.reset();
     },
     resetPostOptions() {
