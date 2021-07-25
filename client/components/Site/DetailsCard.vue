@@ -26,7 +26,8 @@
           <div class="text-sm">
             <p class="text-gray-600">
               Category:
-              <span
+              <nuxt-link
+                :to="'/categories/' + articleData.category.slug"
                 class="
                   text-xs
                   mb-2
@@ -42,9 +43,8 @@
                   last:mr-0
                   mr-1
                 "
+                >{{ articleData.category.title }}</nuxt-link
               >
-                {{ articleData.category.title }}
-              </span>
             </p>
             <p class="text-gray-600">
               Published: {{ articleData.created_at_dates.created_at }}

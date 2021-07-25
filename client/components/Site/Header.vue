@@ -5,17 +5,49 @@
       :class="navbarBackground"
     >
       <div
-        class="w-full flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start"
+        class="
+          w-full
+          flex
+          justify-between
+          lg:w-auto
+          px-4
+          lg:static
+          lg:block
+          lg:justify-start
+        "
       >
         <nuxt-link
-          class="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+          class="
+            text-lg
+            font-bold
+            leading-relaxed
+            inline-block
+            mr-4
+            py-2
+            whitespace-nowrap
+            uppercase
+            tracking-wide
+          "
           :class="colorText"
           to="/"
         >
           YROL.BLOG
         </nuxt-link>
         <button
-          class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+          class="
+            cursor-pointer
+            text-xl
+            leading-none
+            px-3
+            py-1
+            border border-solid border-transparent
+            rounded
+            bg-transparent
+            block
+            lg:hidden
+            outline-none
+            focus:outline-none
+          "
           :class="colorText"
           type="button"
           v-on:click="toggleNavbar()"
@@ -34,7 +66,13 @@
           <li class="nav-item">
             <div class="px-3 py-2 flex items-center">
               <nuxt-link
-                class="text-xs uppercase font-bold leading-snug hover:opacity-75"
+                class="
+                  text-xs
+                  uppercase
+                  font-bold
+                  leading-snug
+                  hover:opacity-75
+                "
                 :class="textColor"
                 to="/"
               >
@@ -48,17 +86,23 @@
           </li>
           <li class="nav-item">
             <div class="px-3 py-2 flex items-center">
-              <nuxt-link
-                class="text-xs uppercase font-bold leading-snug hover:opacity-75"
+              <a
+                class="
+                  text-xs
+                  uppercase
+                  font-bold
+                  leading-snug
+                  hover:opacity-75
+                "
+                @click="goToSite('https://github.com/Yrol/')"
                 :class="textColor"
-                to="/"
               >
                 <i />
                 <font-awesome-icon
                   :icon="['fas', 'code']"
                   class="fa-fw fa-lg mr-1 fa-square fa-w-14"
                 /><span class="inline-block align-middle">Code</span>
-              </nuxt-link>
+              </a>
             </div>
           </li>
         </ul>
@@ -96,6 +140,9 @@ export default {
   methods: {
     toggleNavbar: function () {
       this.showMenu = !this.showMenu;
+    },
+    goToSite: function (link, target = '_blank') {
+      window.open(link, target);
     },
   },
 };

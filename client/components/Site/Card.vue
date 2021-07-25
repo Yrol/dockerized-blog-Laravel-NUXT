@@ -50,7 +50,8 @@
             <!-- <p class="text-black leading-none">{{ author }}</p> -->
             <p class="text-gray-600">
               Category:
-              <span
+              <nuxt-link
+                :to="'/categories/' + postData.category.slug"
                 class="
                   text-xs
                   mb-2
@@ -66,9 +67,8 @@
                   last:mr-0
                   mr-1
                 "
+                >{{ postData.category.title }}</nuxt-link
               >
-                {{ postData.category.title }}
-              </span>
             </p>
             <p class="text-gray-600">
               Published: {{ postData.created_at_dates.created_at }}

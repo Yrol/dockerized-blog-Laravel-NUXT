@@ -35,7 +35,7 @@ export default {
    */
   loading: {
     color: '#f66d9b',
-    height: '5px'
+    height: '6px'
   },
   //loading:'~/components/Site/Loading.vue',//using the custom loading component
   /*
