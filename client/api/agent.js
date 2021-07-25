@@ -84,8 +84,13 @@ const SettingsKeyValue = {
   delete: (slug) => requests.del(`/settings/keyvalue/${slug}`),
 }
 
+const Password = {
+  update: (passwordData) => requests.put(`/settings/password/`, passwordData),
+}
+
 export default{
   Posts,
   Categories,
-  SettingsKeyValue
+  SettingsKeyValue,
+  Password
 }

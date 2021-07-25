@@ -44,7 +44,15 @@
       />
       <div
         v-if="errors[0]"
-        class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+        class="
+          absolute
+          inset-y-0
+          right-0
+          pr-3
+          flex
+          items-center
+          pointer-events-none
+        "
       >
         <svg
           class="h-5 w-5 text-red-500"
@@ -59,18 +67,29 @@
         </svg>
       </div>
     </div>
+    <div v-if="errors[0]" class="relative rounded-md shadow-sm">
+      <ul>
+        <li
+          class="mt-1 text-xs text-red-600"
+          v-for="(error, index) in errors"
+          :key="`error-${index}`"
+        >
+          {{ error }}
+        </li>
+      </ul>
+    </div>
   </ValidationProvider>
 </template>
 <script>
 export default {
-  name: "FormText",
+  name: 'FormText',
   props: {
     value: String,
     name: String,
     errors: [],
     type: {
       type: String,
-      default: "text",
+      default: 'text',
     },
     icon: String,
     label: String,
@@ -97,7 +116,7 @@ export default {
     },
     proxy(value) {
       if (value !== this.value) {
-        this.$emit("input", value);
+        this.$emit('input', value);
       }
     },
   },

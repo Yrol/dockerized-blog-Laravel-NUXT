@@ -1,6 +1,14 @@
 <template>
   <header
-    class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-600"
+    class="
+      flex
+      justify-between
+      items-center
+      py-4
+      px-6
+      bg-white
+      border-b-4 border-indigo-600
+    "
   >
     <div class="flex items-center">
       <button
@@ -37,7 +45,15 @@
         </span>
 
         <input
-          class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600"
+          class="
+            form-input
+            w-32
+            sm:w-64
+            rounded-md
+            pl-10
+            pr-4
+            focus:border-indigo-600
+          "
           type="text"
           placeholder="Search"
         />
@@ -65,7 +81,17 @@
       <div class="relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
-          class="relative z-10 block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none"
+          class="
+            relative
+            z-10
+            block
+            h-8
+            w-8
+            rounded-full
+            overflow-hidden
+            shadow
+            focus:outline-none
+          "
         >
           <img
             class="h-full w-full object-cover"
@@ -82,17 +108,43 @@
 
         <div
           v-show="dropdownOpen"
-          class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+          class="
+            absolute
+            right-0
+            mt-2
+            py-2
+            w-48
+            bg-white
+            rounded-md
+            shadow-xl
+            z-20
+          "
         >
-          <a
-            href="#"
-            class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Profile</a
+          <nuxt-link
+            to="/admin/profile"
+            class="
+              block
+              px-4
+              py-2
+              text-sm text-gray-700
+              hover:bg-indigo-600
+              hover:text-white
+            "
+            >Profile</nuxt-link
           >
           <form @submit.prevent="signout">
             <button
               type="submit"
-              class="block flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                block
+                flex
+                w-full
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600
+                hover:text-white
+              "
             >
               <span class="flex-start">Sign out</span>
             </button>
