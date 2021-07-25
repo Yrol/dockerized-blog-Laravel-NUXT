@@ -122,6 +122,7 @@
         >
           <nuxt-link
             to="/admin/profile"
+            @click.native="dropdownOpen = false"
             class="
               block
               px-4

@@ -192,6 +192,13 @@ export default {
       return true;
     },
 
+    clearPostData() {
+      this.currentPassword = '';
+      this.newPassword = '';
+      this.confirmPassword = '';
+      this.$refs.postForm.reset();
+    },
+
     async changePasswordAction() {
       if (!this.modalStatus.changePassword) {
         return;
@@ -216,9 +223,7 @@ export default {
       try {
         await agent.Password.update(formData);
         this.setModalStatus('changePassword', false);
-        this.currentPassword = '';
-        this.newPassword = '';
-        this.confirmPassword = '';
+        this.clearPostData();
       } catch (error) {
         if (error?.data?.errors) {
           let errors = error.data.errors;
