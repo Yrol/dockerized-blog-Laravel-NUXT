@@ -74,6 +74,7 @@ const Categories = {
   categories: () => requests.get('/categories').then(responseBody),
   create: (categoryData) => requests.post('/categories', categoryData),
   update: (slug, categoryData) => requests.put(`/categories/${slug}`, categoryData),
+  delete: (slug) => requests.del(`/categories/${slug}`),
   categoriesCount: () => requests.get(`/count/categories`),
 }
 

@@ -173,6 +173,89 @@
         </form>
       </ValidationObserver>
     </Modal>
+    <Modal
+      :visible="modalStatus.deleteCategory"
+      @close="modalStatus.deleteCategory = false"
+    >
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="sm:flex sm:items-start">
+          <div
+            class="
+              mx-auto
+              flex-shrink-0 flex
+              items-center
+              justify-center
+              h-12
+              w-12
+              rounded-full
+              bg-red-100
+              sm:mx-0
+              sm:h-10
+              sm:w-10
+            "
+          >
+            <svg
+              class="h-6 w-6 text-red-600"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
+
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3
+              class="text-lg leading-6 font-medium text-gray-900"
+              id="modal-headline"
+            >
+              Are you sure?
+            </h3>
+
+            <div class="mt-2">
+              <p class="text-sm leading-5 text-gray-500">
+                This action will permanently delete the Category.
+              </p>
+              <p class="text-sm leading-5 text-gray-500">
+                {{ deleteCategorySlug }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+          <Button
+            variant="danger"
+            @click="deleteCategoryConfirmAction()"
+            :loading="modalSubmitting"
+            :disableButton="modalSubmitting ? true : false"
+            size="small"
+            width="full"
+          >
+            Yes, Proceed
+          </Button>
+        </span>
+
+        <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+          <Button
+            variant="white"
+            @click="modalNo()"
+            :disableButton="modalSubmitting ? true : false"
+            size="small"
+            width="full"
+          >
+            No
+          </Button>
+        </span>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -210,6 +293,8 @@ export default {
         editCategory: false,
         deleteCategory: false,
       },
+      deleteCategorySlug: String,
+      deleteCategoryId: Number,
       modalSubmitting: false,
       categoryTitle: '',
       categorySlug: '',
@@ -228,7 +313,11 @@ export default {
       this.categoryId = id;
     },
 
-    deleteCategoryModalOpen(id, slug) {},
+    deleteCategoryModalOpen(id, slug) {
+      this.setModalStatus('deleteCategory', true);
+      this.deleteCategoryId = id;
+      this.deleteCategorySlug = slug;
+    },
 
     async addCategoryAction() {
       if (!this.modalStatus.addCategory) {
@@ -263,6 +352,38 @@ export default {
               message: errors[key][0],
             });
           }
+        }
+      } finally {
+        this.modalSubmitting = false;
+      }
+    },
+
+    async deleteCategoryConfirmAction() {
+      if (!this.modalStatus.deleteCategory) {
+        return;
+      }
+
+      if (this.modalSubmitting) {
+        return;
+      }
+
+      this.modalSubmitting = true;
+
+      try {
+        await agent.Categories.delete(this.deleteCategorySlug);
+        this.$store.dispatch('admin/admin-categories/deleteCategory', {
+          id: this.deleteCategoryId,
+        });
+        this.setModalStatus('deleteCategory', false);
+      } catch (error) {
+        if (error?.data?.errors) {
+          let errors = error.data.errors;
+          this.modalStatus.deleteCategory = false;
+          this.$toast.show({
+            type: 'danger',
+            title: 'Error',
+            message: errors['message'],
+          });
         }
       } finally {
         this.modalSubmitting = false;
@@ -325,6 +446,10 @@ export default {
         this.modalSubmitting = false;
         this.modalStatus[key] = false;
       }
+    },
+    modalNo() {
+      this.modalSubmitting = false;
+      this.modalStatus.deleteCategory = false;
     },
   },
   async fetch() {

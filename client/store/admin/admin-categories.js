@@ -32,7 +32,12 @@ export const mutations = {
   },
 
   DELETE_CATEGORY(state, payload) {
+    let categoryIndex = state.categories.findIndex(category => category.id === payload.id)
+    state.categories.splice(categoryIndex, 1)
 
+    if(state.totalCategories > 0){
+      state.totalCategories--;
+    }
   }
 }
 
@@ -50,6 +55,12 @@ export const actions = {
 
   updateCategory({commit}, payload){
     commit('UPDATE_CATEGORY', payload);
+  },
+
+  deleteCategory({commit}, payload){
+    if(payload && payload.hasOwnProperty('id')){
+      commit('DELETE_CATEGORY', payload);
+    }
   },
 
   clear({commit}){
