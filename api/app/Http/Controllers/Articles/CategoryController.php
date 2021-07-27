@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Articles;
 
+use App\Exceptions\CategoryNotEmptyException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\CategoryResource;
@@ -72,5 +73,20 @@ class CategoryController extends Controller
         $resource = $this->category->update($category->id, $request->only('title'));
 
         return response()->json(new CategoryResource($resource), Response::HTTP_ACCEPTED);
+    }
+
+    /*
+    * Deleting Category
+    */
+    public function destroy(Category $category)
+    {
+        if ($category->articles->count() > 0) {
+            abort(response()->json(['errors' => ['message' => 'Category not empty. Please remove all the articles and try again.']], Response::HTTP_UNPROCESSABLE_ENTITY));
+        }
+
+        //delete defined in BaseRepository
+        if ($this->category->delete($category->id)) {
+            return response()->json(null, Response::HTTP_NO_CONTENT);
+        }
     }
 }

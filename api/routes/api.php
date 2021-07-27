@@ -152,6 +152,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     /** ******* Categories ********* */
     Route::post('categories/', 'Articles\CategoryController@store');
     Route::put('categories/{category}', 'Articles\CategoryController@update');
+    Route::delete('categories/{category}', 'Articles\CategoryController@destroy');
 });
 
 //Route group for guest user only
