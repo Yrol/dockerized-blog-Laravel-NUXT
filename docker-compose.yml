@@ -8,6 +8,7 @@ services:
     build:
       context: docker/nginx
       dockerfile: Dockerfile
+    container_name: nginx_service
     volumes:
       - ./:/var/www
       - ./docker/nginx/logs:/var/log/nginx
@@ -25,6 +26,7 @@ services:
     build:
       context: docker/php
       dockerfile: Dockerfile
+    container_name: php_service
     volumes:
       - ./api:/var/www/api
     environment:
@@ -42,6 +44,7 @@ services:
     build:
       context: docker/supervisor
       dockerfile: Dockerfile
+    container_name: supervisor_service
     volumes:
       - ./:/var/www/
       - ./docker/supervisor/conf.d:/etc/supervisor/conf.d
@@ -56,7 +59,7 @@ services:
     build:
       context: docker/mysql
       dockerfile: Dockerfile
-    container_name: mysql
+    container_name: mysql_service
     restart: unless-stopped
     tty: true #enable CLI/bash interface on the MySQL container
     volumes:
@@ -80,6 +83,7 @@ services:
     build:
       context: docker/redis
       dockerfile: Dockerfile
+    container_name: redis_service
     volumes:
       - redis:/data
     ports:
@@ -90,6 +94,7 @@ services:
     build:
       context: docker/mailhog
       dockerfile: Dockerfile
+    container_name: mailhog_service
     ports:
       - 8026:8025
 
@@ -98,6 +103,7 @@ services:
     build:
       context: docker/client
       dockerfile: Dockerfile
+    container_name: client_service
     volumes:
       - ./client:/var/www/client
 
