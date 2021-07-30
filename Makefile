@@ -269,6 +269,15 @@ install-nuxt:
 	docker-compose up -d
 	docker-compose exec client npm info nuxt version
 
+deploy-apps: deploy-php deploy-nuxt prune-f
+
+deploy-php:
+	docker-compose exec php php artisan migrate
+	docker-compose exec php composer install
+
+deploy-nuxt:
+	docker-compose up -d --force-recreate --no-deps --build client
+
 #-----------------------------------------------------------
 # Clearing
 #-----------------------------------------------------------
@@ -284,3 +293,7 @@ prune-networks:
 # Clear cache
 prune-a:
 	docker system prune -a
+
+#force prune
+prune-f:
+	docker system prune -af
