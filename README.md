@@ -503,6 +503,24 @@ Portainer is a universal container management tool. It works with Kubernetes, Do
 http://<your-server-ip>:9000/
 ```
 
+Setting up reverse proxy for Portainer (in `/etc/nginx/sites-available/default` as above).
+
+```
+	location /portainer {
+		rewrite ^/portainer(/.*)$ /$1 break;
+		proxy_pass http://localhost:9000/;
+		proxy_http_version 1.1;
+		proxy_set_header Connection "";
+	}
+
+	location /portainer/api {
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_pass http://localhost:9000/api;
+		proxy_set_header Connection 'upgrade';
+		proxy_http_version 1.1;
+	}
+```
+
 ## Additional information
 
 - This template has been tested in Mac OS 10.15. Therefore, make changes to the commands such as `chown` available in `Makefile` depending on your environment.
