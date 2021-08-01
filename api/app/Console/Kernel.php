@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        // add the MySqlDump command here
+        \App\Console\Commands\MySqlDump::class,
     ];
 
     /**
