@@ -26,6 +26,9 @@ RUN docker-php-ext-install gd
 #PDO MySQL
 RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
+#MySQL Command-Line Client
+RUN apt-get install -y mariadb-client
+
 # BC Math
 RUN docker-php-ext-install bcmath
 
