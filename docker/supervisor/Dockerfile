@@ -44,6 +44,12 @@ RUN docker-php-ext-install gd
 # BC Math
 RUN docker-php-ext-install bcmath
 
+#PDO MySQL
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+
+#MySQL Command-Line Client
+RUN apt-get install -y mariadb-client
+
 # Human Language and Character Encoding Support
 RUN apt-get install -y zlib1g-dev libicu-dev g++ \
     && docker-php-ext-configure intl \
