@@ -39,10 +39,9 @@ class ArticleResource extends JsonResource
             'user' => new UserResource($this->user),
             'comments_count' => $this->comments->count(),
             //'comments' => CommentResource::collection($this->comments), // load all the comments
-            'tag_list' => [
+            'tag_list' =>
                 //'tags' => $this->tags //will output tags will all information
                 $this->tagSlugs()
-            ]
         ];
     }
 }

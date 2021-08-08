@@ -66,15 +66,23 @@ class ArticleController extends Controller
             })],
             'body' => ['required', 'string'],
             'is_live' => ['required', 'boolean'],
-            'close_to_comments' => ['required', 'boolean']
+            'close_to_comments' => ['required', 'boolean'],
+            'tags' => ['nullable']
         ]);
 
         $request->merge(['user_id' => auth()->user()->id]);
 
         // //$article = auth()->user()->articles()->create($request->all()); //user ID will be added automatically to the 'user_id' foreign field of articles
         //create defined in BaseRepository
-        $resource = $this->articles->create($request->all());
-        return response(new ArticleResource($resource), Response::HTTP_CREATED);
+        $article = $this->articles->create($request->all());
+
+        $tags = $request->input('tags');
+
+        if ($tags) {
+            $this->articles->applyTags($article->id, json_decode($request->input('tags'), true));
+        }
+
+        return response(new ArticleResource($article), Response::HTTP_CREATED);
     }
 
     /*
@@ -109,7 +117,7 @@ class ArticleController extends Controller
         $tags = $request->input('tags');
 
         if ($tags) {
-            $this->articles->applyTags($article->id, $request->input('tags'));
+            $this->articles->applyTags($article->id, json_decode($request->input('tags'), true));
         }
 
         return response()->json(new ArticleResource($resource), Response::HTTP_ACCEPTED);

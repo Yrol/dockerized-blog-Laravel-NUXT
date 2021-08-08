@@ -10,7 +10,7 @@
         <span>
           <Vue2Editor :editMode="false" v-model="articleData.body"
         /></span>
-        <div class="mb-2 mt-2">
+        <!-- <div class="mb-2 mt-2">
           <a
             class="text-sm text-gray-600 p-1 hover:text-black"
             v-for="(tag, index) in articleData.tag_list[0]"
@@ -19,7 +19,7 @@
           >
             <span class="text-opacity-50">{{ tag }}</span>
           </a>
-        </div>
+        </div> -->
       </div>
       <div class="flex mb-4">
         <div class="flex items-center w-3/4">

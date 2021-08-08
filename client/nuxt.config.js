@@ -52,6 +52,7 @@ export default {
     { src: "~plugins/validation.js", ssr: false },
     { src: "~plugins/datePicker.js", ssr: false},
     { src: "~plugins/vue2-editor.js", ssr: false },
+    { src: "~plugins/vue-tags-input.js", ssr: false },
     '~plugins/eventBus.js'
   ],
   /*

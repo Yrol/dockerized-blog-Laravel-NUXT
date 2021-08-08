@@ -55,7 +55,7 @@
                   leading-normal
                 "
               >
-                <div class="mb-8">
+                <div class="mb-4">
                   <p class="text-sm text-gray-600 flex items-center">
                     <svg
                       class="fill-current text-gray-500 w-3 h-3 mr-2"
@@ -71,6 +71,21 @@
                   <div>
                     <Vue2Editor v-model="richTextContent" />
                   </div>
+                </div>
+                <div class="mb-8">
+                  <p class="text-sm text-gray-600 flex items-center">
+                    <svg
+                      class="fill-current text-gray-500 w-3 h-3 mr-2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
+                      ></path>
+                    </svg>
+                    Tags
+                  </p>
+                  <TagsInput v-model="tags" />
                 </div>
               </div>
             </div>
@@ -108,6 +123,7 @@ import Vue2Editor from '~/components/Input/Vue2Editor';
 import FormCheckbox from '~/components/Input/FormCheckbox';
 import DropDown from '~/components/Input/DropDown';
 import AdminLoader from '~/components/Dashboard/AdminLoader';
+import TagsInput from '~/components/Input/TagsInput';
 import agent from '~/api/agent';
 import { mapGetters } from 'vuex';
 export default {
@@ -124,6 +140,7 @@ export default {
     DropDown,
     AdminLoader,
     Vue2Editor,
+    TagsInput,
   },
   data() {
     return {
@@ -138,6 +155,7 @@ export default {
       isSubmitting: false,
       categoriesList: [],
       postOptions: [],
+      tags: [],
     };
   },
   methods: {
@@ -155,6 +173,7 @@ export default {
         is_live: this.postOptions[0].selected,
         close_to_comments: this.postOptions[1].selected,
         category_id: Number(this.postCategory),
+        tags: JSON.stringify(this.tags),
       };
 
       try {
@@ -205,7 +224,7 @@ export default {
       this.richTextContent = '';
       this.postTitle = '';
       this.postDesription = '';
-      this.$refs.postForm.reset();
+      (this.tags = []), this.$refs.postForm.reset();
     },
     resetPostOptions() {
       this.postOptions = [
@@ -217,6 +236,7 @@ export default {
         },
       ];
     },
+    getTags() {},
   },
   beforeMount() {
     this.resetPostOptions();
