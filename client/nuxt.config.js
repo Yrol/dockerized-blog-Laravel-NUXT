@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const webpack = require("webpack");
+const axios = require('axios')
 
 export default {
   /*
@@ -29,6 +30,39 @@ export default {
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+  },
+  sitemap: {
+    hostname: process.env.SITE_URL,
+    gzip: true,
+    exclude: [
+      '/mystery',
+      '/admin',
+      '/showcase',
+      '/admin/**'
+    ],
+    routes: async () => {
+      let baseUrl =  process.env.API_URL;
+      let { data } = await axios.get(`${baseUrl}/api/articles/seo`)
+      let posts = data.map((post) => {
+        return {
+          url:`/posts/${post.slug}`,
+          changefreq: 'weekly',
+          priority: 1,
+          lastmod: post.updated_at
+        }
+      })
+
+      let categories = data.map((post) => {
+        return {
+          url:`/categories/${post.category.slug}`,
+          changefreq: 'weekly',
+          priority: 1,
+          lastmod: new Date()
+        }
+      })
+
+      return [ ...posts, ...categories ]
+    },
   },
   /**
    * Customized loading indicator and customizing the top loading bar
@@ -89,7 +123,8 @@ export default {
           }
         ]
       }
-    ]
+    ],
+    '@nuxtjs/sitemap'
   ],
 
   auth: {

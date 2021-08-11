@@ -16,6 +16,7 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/sitemap": "^2.4.0",
     "dotenv": "^8.2.0",
     "highlight.js": "^11.1.0",
     "jquery": "^3.5.1",

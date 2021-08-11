@@ -46,6 +46,11 @@ Route::get('articles', 'Articles\ArticleController@index');
 Route::get('articles/all', 'Articles\AllArticleController');
 
 /**
+ * Fetching both published and unpublished articles
+ * */
+Route::get('articles/seo', 'Articles\SeoArticlesController');
+
+/**
  * Fetching a single article
  * Using route model binding - {article} variable matches what's in Route method
  * */
