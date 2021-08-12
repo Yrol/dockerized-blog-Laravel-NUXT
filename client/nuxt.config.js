@@ -32,7 +32,7 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   sitemap: {
-    hostname: process.env.SITE_URL,
+    hostname: process.env.API_URL_BROWSER,
     gzip: true,
     exclude: [
       '/mystery',
