@@ -1,7 +1,8 @@
+import axios from 'axios'
+
 require('dotenv').config()
 
 const webpack = require("webpack");
-const axios = require('axios')
 
 export default {
   /*
@@ -40,9 +41,9 @@ export default {
       '/showcase',
       '/admin/**'
     ],
-    routes: async () => {
+    routes: () => {
       let baseUrl = process.env.API_URL;
-      return await axios.get(`${baseUrl}/api/articles/seo`)
+      return axios.get(`${baseUrl}/api/articles/seo`)
         .then(res => res.data.map(post => {
           return {
             url:`/posts/${post.slug}`,
