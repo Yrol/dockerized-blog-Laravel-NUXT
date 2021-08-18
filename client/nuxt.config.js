@@ -1,8 +1,7 @@
-import axios from 'axios'
-
 require('dotenv').config()
 
 const webpack = require("webpack");
+import axios from 'axios'
 
 export default {
   /*
@@ -34,6 +33,7 @@ export default {
   },
   sitemap: {
     hostname: process.env.API_URL_BROWSER,
+    cacheTime: -1,
     gzip: true,
     exclude: [
       '/mystery',
@@ -41,17 +41,28 @@ export default {
       '/showcase',
       '/admin/**'
     ],
-    routes: () => {
-      let baseUrl = process.env.API_URL;
-      return axios.get(`${baseUrl}/api/articles/seo`)
-        .then(res => res.data.map(post => {
-          return {
-            url:`/posts/${post.slug}`,
-            changefreq: 'daily',
-            priority: 1,
-            lastmod: post.updated_at
-          }
-      }))
+    routes: async () => {
+      let baseUrl =  process.env.API_URL;
+      let { data } = await axios.get(`${baseUrl}/api/articles/seo`)
+      let posts = data.map(post => {
+        return {
+          url:`/posts/${post.slug}`,
+          changefreq: 'daily',
+          priority: 1,
+          lastmod: post.updated_at
+        }
+      })
+
+      let categories = data.map(post => {
+        return {
+          url:`/categories/${post.category.slug}`,
+          changefreq: 'daily',
+          priority: 1,
+          lastmod: new Date()
+        }
+      })
+
+      return [ ...posts, ...categories ]
     },
   },
   /**
