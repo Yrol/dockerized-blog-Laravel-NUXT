@@ -23,6 +23,6 @@ class SeoArticlesController extends Controller
                     new IsLive(),
                     new UpdatedFirst(),
                 ])->all();
-        return response()->json(SeoArticleResource::collection($articles));
+        return SeoArticleResource::collection($articles);
     }
 }
