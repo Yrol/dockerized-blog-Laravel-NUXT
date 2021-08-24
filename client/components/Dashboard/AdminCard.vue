@@ -44,7 +44,7 @@
       <div class="mb-4 w-full flex flex-wrap">
         <div
           v-if="dataReady"
-          class="h-16 border-8:transparent w-full md:w-1/2 lg:w-1/4 md:h-16"
+          class="h-16 border-8:transparent w-full md:w-1/2 lg:w-2/4 md:h-16"
         >
           <div class="text-sm">
             <!-- <p class="text-black leading-none">{{ author }}</p> -->
@@ -110,7 +110,7 @@
             border-8:transparent
             w-full
             md:w-1/2
-            lg:w-3/4
+            lg:w-2/4
           "
         >
           <Button
