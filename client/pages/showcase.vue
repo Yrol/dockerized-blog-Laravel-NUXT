@@ -20,8 +20,22 @@
       </div>
     </div>
     <div class="flex flex-wrap">
-      <div class="w-full md:w-3/4 p-4">
+      <div
+        class="
+          w-full
+          bg-white
+          rounded-b
+          lg:rounded-b-none lg:rounded-r
+          md:w-3/4
+          p-4
+        "
+      >
         <Vue2Editor v-model="richTextContent" />
+      </div>
+    </div>
+    <div class="flex flex-wrap">
+      <div class="w-full md:w-3/4 p-4">
+        <TagsInput v-model="tags" />
       </div>
     </div>
     <div class="flex flex-wrap">
@@ -332,6 +346,7 @@ import Button from '~/components/Input/Button';
 import FormRadio from '~/components/Input/FormRadio';
 import FormSelect from '~/components/Input/FormSelect';
 import Modal from '~/components/Site/Modal';
+import TagsInput from '~/components/Input/TagsInput';
 import Vue2Editor from '~/components/Input/Vue2Editor';
 import { mapGetters } from 'vuex';
 
@@ -355,6 +370,7 @@ export default {
     FormRadio,
     FormSelect,
     Vue2Editor,
+    TagsInput,
   },
   head: {
     title: 'Showcase',
