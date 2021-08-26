@@ -30,6 +30,7 @@ import Header from '~/components/Site/Header';
 import Footer from '~/components/Site/Footer';
 import getPostsByCategory from '~/api/getPostsByCategory';
 import Pagination from '~/components/Site/Pagination';
+import { generateSeoMeta } from '~/utils/seo';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -58,11 +59,6 @@ export default {
       postsPerPage: 'categories/perPagePosts',
     }),
   },
-  head() {
-    return {
-      title: this.$route.params.slug || '',
-    };
-  },
   async asyncData({ $axios, store, app, params, error }) {
     return await getPostsByCategory($axios, store, params, error)
       .then((res) => {
@@ -76,6 +72,14 @@ export default {
           errorStatus: e?.response?.status,
         };
       });
+  },
+  head() {
+    const url = `${process.env.API_URL_BROWSER}/categories/${this.$route.params.slug}`;
+    const { title, description } = this.$route.params.slug;
+    return {
+      title: `${title} - Yrol's blog` || '',
+      meta: generateSeoMeta({ title, description, url }),
+    };
   },
 };
 </script>

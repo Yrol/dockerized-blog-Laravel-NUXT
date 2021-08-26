@@ -26,6 +26,7 @@ import Footer from '~/components/Site/Footer';
 import getPosts from '~/api/getPosts';
 import Pagination from '~/components/Site/Pagination';
 import { mapGetters } from 'vuex';
+import { generateSeoMeta } from '~/utils/seo';
 
 export default {
   name: 'HomePage',
@@ -63,8 +64,12 @@ export default {
       .catch((e) => {});
   },
   head() {
+    const url = `${process.env.API_URL_BROWSER}`;
+    const title = 'Home';
+    const description = "Yrol's personal blog";
     return {
-      title: 'Home',
+      title: title,
+      meta: generateSeoMeta({ title, description, url }),
     };
   },
 };

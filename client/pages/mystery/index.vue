@@ -102,6 +102,7 @@ export default {
             .then((res) => {
               //console.log(res.data.token);
               if (res?.data?.token) {
+                this.$auth.setUser(res.data);
                 this.loginSuccessful = true;
               }
             })

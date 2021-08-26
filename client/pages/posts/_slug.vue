@@ -13,6 +13,7 @@ import getSinglePost from '~/api/getSinglePost';
 import Header from '~/components/Site/Header';
 import Footer from '~/components/Site/Footer';
 import PostView from '~/components/Site/PostView';
+import { generateSeoMeta } from '~/utils/seo';
 export default {
   name: 'PostPage',
   components: {
@@ -41,8 +42,11 @@ export default {
     },
   },
   head() {
+    const url = `${process.env.API_URL_BROWSER}/posts/${this.$route.params.slug}`;
+    const { title, description } = this.post;
     return {
-      title: this.$route.params.slug || '',
+      title: `${title} - Yrol's blog` || '',
+      meta: generateSeoMeta({ title, description, url }),
     };
   },
 };
