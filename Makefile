@@ -228,7 +228,7 @@ autoload:
 	docker-compose exec php composer dump-autoload
 
 # Install the environment
-install: env-api env-client generate-secret-key build install-laravel migrate-refresh db-seed install-nuxt restart
+install: env-api env-client build install-laravel generate-secret-key migrate-refresh db-seed install-nuxt restart
 
 
 #-----------------------------------------------------------
