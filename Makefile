@@ -203,6 +203,10 @@ env-api:
 env-client:
 	cp .env.client client/.env
 
+# Generating JWT secret key
+generate-secret-key:
+	docker-compose exec php php artisan jwt:secret --force
+
 # Add permissions for Laravel cache and storage folders
 permissions:
 	sudo chmod -R 777 api/bootstrap/cache
@@ -224,7 +228,7 @@ autoload:
 	docker-compose exec php composer dump-autoload
 
 # Install the environment
-install: build install-laravel env-api migrate-refresh db-seed install-nuxt env-client restart
+install: env-api env-client generate-secret-key build install-laravel migrate-refresh db-seed install-nuxt restart
 
 
 #-----------------------------------------------------------
@@ -257,7 +261,6 @@ install-laravel:
 	sudo chown -Rv ${USER} api
 	sudo chmod -R 777 api/bootstrap/cache
 	sudo chmod -R 777 api/storage
-	cp .env api/.env
 	docker-compose exec php php artisan key:generate --ansi
 	docker-compose exec php php artisan --version
 
@@ -265,7 +268,6 @@ install-laravel:
 install-nuxt:
 	docker-compose down
 	sudo chown -Rv ${USER} client
-	cp .env.client client/.env
 	docker-compose up -d
 	docker-compose exec client npm info nuxt version
 
