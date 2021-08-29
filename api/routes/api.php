@@ -16,23 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 //public routes
 
-/** ******* Users ********* */
-
-/**
- * Get currently logged in user
- * */
-Route::get('me', 'User\MeController@getMe');
-
-/**
- * Fetching all users
- * */
-Route::get('users', 'User\UserController@index');
-
-/**
- * Fetching active users (users with articles)
- * */
-Route::get('users/active', 'User\UsersWithArticlesController');
-
 /** ******* Articles ********* */
 
 /**
@@ -136,7 +119,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::delete('comments/{comment}', 'Articles\CommentsController@destroy');
     Route::put('comments/{comment}', 'Articles\CommentsController@update');
 
-    /** ******* Liking and Unliking articles ********* */
+    /** ******* Liking and Un-liking articles ********* */
     /*
     * Likes and unlikes
     * Using one route for both like and unlike (if user has already liked will execute the like otherwise execute the like)
@@ -158,6 +141,24 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('categories/', 'Articles\CategoryController@store');
     Route::put('categories/{category}', 'Articles\CategoryController@update');
     Route::delete('categories/{category}', 'Articles\CategoryController@destroy');
+
+
+    /** ******* Users ********* */
+
+    /**
+     * Get currently logged in user
+     * */
+    Route::get('me', 'User\MeController@getMe');
+
+    /**
+     * Fetching all users
+     * */
+    Route::get('users', 'User\UserController@index');
+
+    /**
+     * Fetching active users (users with articles)
+     * */
+    Route::get('users/active', 'User\UsersWithArticlesController');
 });
 
 //Route group for guest user only
