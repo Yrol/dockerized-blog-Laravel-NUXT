@@ -168,7 +168,7 @@ Route::group(['middleware' => ['guest:api']], function () {
     Route::post('register', 'Auth\RegisterController@register'); // referring to the register method of the  register controller
     Route::post('verification/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify'); //Route for sending verification emails
     Route::post('verification/resend', 'Auth\VerificationController@resend');
-    Route::post('login', 'Auth\LoginController@login');
+    Route::post('login', 'Auth\LoginController@login')->name('login');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');//Endpoint:"api/password/email". Using the "sendResetLinkEmail" method in ForgotPasswordController (pre-built controller in Laravel auth)
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');//Endpoint:"api/password/reset"
 });
