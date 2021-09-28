@@ -25,7 +25,17 @@
       </div>
       <input type="text" v-model="proxy" class="hidden" />
       <span
-        class="flex items-center justify-between px-3 py-2 bg-white w-full border border-gray-500 rounded-lg"
+        class="
+          flex
+          items-center
+          justify-between
+          px-3
+          py-2
+          bg-white
+          w-full
+          border border-gray-500
+          rounded-lg
+        "
         :class="{
           'pl-12': icon,
           'border-red-300 text-red-600 flex items-center justify-between px-3 py-2 bg-white w-full focus:border-red-300 focus:shadow-outline-red rounded-lg':
@@ -39,7 +49,14 @@
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          class="h-4 w-4 transform transition-transform duration-200 ease-in-out"
+          class="
+            h-4
+            w-4
+            transform
+            transition-transform
+            duration-200
+            ease-in-out
+          "
           :class="isOptionsExpanded ? 'rotate-180' : 'rotate-0'"
         >
           <path
@@ -60,7 +77,18 @@
       >
         <ul
           v-show="isOptionsExpanded"
-          class="absolute z-40 left-0 right-0 mb-4 bg-white divide-y rounded-lg shadow-lg overflow-hidden"
+          class="
+            absolute
+            z-40
+            left-0
+            right-0
+            mb-4
+            bg-white
+            divide-y
+            rounded-lg
+            shadow-lg
+            overflow-hidden
+          "
         >
           <li
             v-for="(option, index) in options"

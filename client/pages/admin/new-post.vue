@@ -208,9 +208,9 @@ export default {
       try {
         let categories = await agent.Categories.categories();
         if (categories.length > 0) {
-          categories.forEach((category) => {
+          categories.forEach((category, index) => {
             let categoryObj = {};
-            categoryObj['value'] = category.id.toString();
+            categoryObj['value'] = (index + 1).toString();
             categoryObj['name'] = category.title;
             this.categoriesList.push(categoryObj);
           });

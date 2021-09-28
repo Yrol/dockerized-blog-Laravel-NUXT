@@ -271,6 +271,7 @@ install-nuxt:
 	docker-compose up -d
 	docker-compose exec client npm info nuxt version
 
+# can be used to re-depoly frontend and backend after adding new changes (call manually or within an automated deploy script). 
 deploy-apps: deploy-php deploy-nuxt prune-f
 
 deploy-php:
