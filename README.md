@@ -521,6 +521,12 @@ Setting up reverse proxy for Portainer (in `/etc/nginx/sites-available/default` 
 	}
 ```
 
+- Starting the portainer manually
+
+```
+sudo docker start portainer
+```
+
 ## Additional information
 
 - This template has been tested in Mac OS 10.15. Therefore, make changes to the commands such as `chown` available in `Makefile` depending on your environment.
