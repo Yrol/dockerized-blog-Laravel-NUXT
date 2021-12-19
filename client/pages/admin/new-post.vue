@@ -31,7 +31,7 @@
             </div>
             <div class="min-w-full">
               <DropDown
-                name="category_id"
+                name="category_slug"
                 label="Category"
                 rules="required"
                 icon="folder"
@@ -172,7 +172,7 @@ export default {
         body: this.richTextContent,
         is_live: this.postOptions[0].selected,
         close_to_comments: this.postOptions[1].selected,
-        category_id: Number(this.postCategory),
+        category_slug: this.postCategory,
         tags: JSON.stringify(this.tags),
       };
 
@@ -210,7 +210,7 @@ export default {
         if (categories.length > 0) {
           categories.forEach((category, index) => {
             let categoryObj = {};
-            categoryObj['value'] = (index + 1).toString();
+            categoryObj['value'] = category.slug.toString();
             categoryObj['name'] = category.title;
             this.categoriesList.push(categoryObj);
           });

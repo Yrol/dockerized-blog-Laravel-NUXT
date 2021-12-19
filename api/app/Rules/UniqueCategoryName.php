@@ -3,6 +3,8 @@
 namespace App\Rules;
 
 use App\Models\Article;
+use App\Models\Category;
+use ErrorException;
 use Illuminate\Contracts\Validation\Rule;
 
 class UniqueCategoryName implements Rule
@@ -13,11 +15,12 @@ class UniqueCategoryName implements Rule
      * @return void
      */
 
-    protected $category_id;
+    protected $category_slug;
+    protected $category;
 
-    public function __construct($category_id)
+    public function __construct($category_slug)
     {
-        $this->category_id = $category_id;
+        $this->category_slug = $category_slug;
     }
 
     /**
@@ -29,16 +32,18 @@ class UniqueCategoryName implements Rule
      */
     public function passes($attribute, $value)
     {
-        $articles = Article::where([
-            ['category_id', $this->category_id],
-            ['title', $value]
-        ])->get();
+        $this->category =  Category::where('slug', $this->category_slug)->first();
 
-        if ($articles->count()) {
-            return false;
+        if ($this->category && $this->category->id) {
+            $articles = Article::where([
+                ['category_id',$this->category->id],
+                ['title', $value]
+            ])->get();
+
+            if ($articles->count() <= 0) {
+                return true;
+            }
         }
-
-        return true;
     }
 
     /**
@@ -48,6 +53,6 @@ class UniqueCategoryName implements Rule
      */
     public function message()
     {
-        return 'Article name is already taken for this category.';
+        return ':attribute is already taken for this category or the category does not exist.';
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\CommentResource;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Repositories\Contracts\IArticle;
 use App\Repositories\Eloquent\Criteria\IsLive;
@@ -56,13 +57,13 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        $category_id = $request->input('category_id');
+        $category_slug = $request->input('category_slug');
 
         $this->validate($request, [
-            'title' => ['required', new UniqueCategoryName($category_id), 'string'],
+            'title' => ['required', 'string', new UniqueCategoryName($category_slug)],
             'description' => ['required', 'string'],
-            'category_id' => ['required', Rule::exists('categories', 'id')->where(function ($query) use ($category_id) {
-                $query->where('id', $category_id);
+            'category_slug' => ['required', 'string', Rule::exists('categories', 'slug')->where(function ($query) use ($category_slug) {
+                return $query->where('slug', $category_slug);
             })],
             'body' => ['required', 'string'],
             'is_live' => ['required', 'boolean'],
@@ -70,7 +71,10 @@ class ArticleController extends Controller
             'tags' => ['nullable']
         ]);
 
+        $category = Category::where('slug', $request->input('category_slug'))->first();
+
         $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['category_id' => $category->id]);
 
         // //$article = auth()->user()->articles()->create($request->all()); //user ID will be added automatically to the 'user_id' foreign field of articles
         //create defined in BaseRepository
