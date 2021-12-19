@@ -9,6 +9,7 @@ services:
       context: docker/nginx
       dockerfile: Dockerfile
     container_name: nginx_service
+    restart: unless-stopped
     volumes:
       - ./:/var/www
       - ./docker/nginx/logs:/var/log/nginx
@@ -27,6 +28,7 @@ services:
       context: docker/php
       dockerfile: Dockerfile
     container_name: php_service
+    restart: unless-stopped
     volumes:
       - ./api:/var/www/api
     environment:
@@ -45,6 +47,7 @@ services:
       context: docker/supervisor
       dockerfile: Dockerfile
     container_name: supervisor_service
+    restart: unless-stopped
     volumes:
       - ./:/var/www/
       - ./docker/supervisor/conf.d:/etc/supervisor/conf.d
@@ -75,7 +78,7 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_HOST: "0.0.0.0"
+      MYSQL_ROOT_HOST: "%"
       SERVICE_NAME: mysql
 
   # Redis container
@@ -84,6 +87,7 @@ services:
       context: docker/redis
       dockerfile: Dockerfile
     container_name: redis_service
+    restart: unless-stopped
     volumes:
       - redis:/data
     ports:
@@ -104,6 +108,7 @@ services:
       context: docker/client
       dockerfile: Dockerfile
     container_name: client_service
+    restart: unless-stopped
     volumes:
       - ./client:/var/www/client
 
