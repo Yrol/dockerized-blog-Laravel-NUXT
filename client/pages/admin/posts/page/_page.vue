@@ -18,7 +18,17 @@
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div
-              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+              class="
+                mx-auto
+                flex-shrink-0 flex
+                items-center
+                justify-center
+                h-12
+                w-12
+                rounded-full
+                bg-red-100
+                sm:mx-0 sm:h-10 sm:w-10
+              "
             >
               <svg
                 class="h-6 w-6 text-red-600"
@@ -129,7 +139,6 @@ export default {
       showModal: false,
       modalSubmitting: false,
       deletePostSlug: String,
-      deletePostId: Number,
       paginationFrom: Number,
       paginationTo: Number,
       paginationMeta: {
@@ -139,9 +148,8 @@ export default {
     };
   },
   methods: {
-    deletePost(slug, id) {
+    deletePost(slug) {
       this.deletePostSlug = slug;
-      this.deletePostId = id;
       this.showModal = true;
     },
     async deletePostConfirmAction() {
@@ -149,7 +157,7 @@ export default {
       try {
         await agent.Posts.delete(this.deletePostSlug);
         this.$store.dispatch('admin/admin-posts/deletePost', {
-          id: this.deletePostId,
+          slug: this.deletePostSlug,
         });
       } catch (error) {
         if (error?.data?.errors) {

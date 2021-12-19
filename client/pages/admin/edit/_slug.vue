@@ -149,7 +149,6 @@ export default {
       postDesription: String,
       postCategory: String,
       postSlug: String,
-      postCategoryId: Number,
       isSubmitting: false,
       buttonDisable: false,
       postOptions: [],
@@ -170,7 +169,6 @@ export default {
         description: this.postDesription,
         is_live: this.postOptions[0].selected,
         close_to_comment: this.postOptions[1].selected,
-        category_id: Number(this.postCategoryId),
         slug: this.postSlug,
         tags: JSON.stringify(this.tags),
       };
@@ -223,7 +221,6 @@ export default {
     this.postTitle = post.title;
     this.postDesription = post.description;
     this.postCategory = post.category;
-    this.postCategoryId = post.category.id;
     this.postSlug = post.slug;
     this.tags = post.tag_list;
     this.setPostOptions(post.is_live, post.close_to_comment);

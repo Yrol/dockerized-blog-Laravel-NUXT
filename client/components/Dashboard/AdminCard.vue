@@ -104,9 +104,7 @@
           class="
             md:flex
             flex-wrap
-            md:justify-end
-            md:content-end
-            md:h-16
+            md:justify-end md:content-end md:h-16
             border-8:transparent
             w-full
             md:w-1/2
@@ -137,7 +135,7 @@
             :disableButton="updatingPublishStatus"
             size="small"
             icon="trash-alt"
-            @click="deletePost(postData.slug, postData.id)"
+            @click="deletePost(postData.slug)"
           >
           </Button>
         </div>
@@ -181,7 +179,7 @@ export default {
       postStatus: 'admin/admin-posts/postStatus',
     }),
     isLive() {
-      return this.postStatus(this.postData.id);
+      return this.postStatus(this.postData.slug);
     },
     bodyText() {
       return this.body;
@@ -205,10 +203,9 @@ export default {
           this.postData.slug
         );
         let isLiveStatus = update.is_live;
-        console.log(isLiveStatus);
         if (isLiveStatus == 1 || isLiveStatus == 0) {
           this.$store.dispatch('admin/admin-posts/postStatus', {
-            id: this.postData.id,
+            slug: this.postData.slug,
             state: parseInt(isLiveStatus),
           });
         }
@@ -235,8 +232,8 @@ export default {
       });
     },
 
-    deletePost(slug, id) {
-      this.$emit('delete-post', slug, id);
+    deletePost(slug) {
+      this.$emit('delete-post', slug);
     },
   },
 };

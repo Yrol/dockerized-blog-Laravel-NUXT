@@ -15,11 +15,11 @@ export const getters = {
   allPosts:(state) => {
     return state.posts
   },
-  postStatus:(state) => (id) => {
+  postStatus:(state) => (slug) => {
     if(!state.posts) {
       return
     }
-    let post = state.posts.find(post => post.id == id)
+    let post = state.posts.find(post => post.slug == slug)
     return post.is_live;
   },
   post:(state) => (slug) => {
@@ -48,14 +48,15 @@ export const mutations = {
     state.perPagePosts = payload
   },
   SET_POST_STATUS(state, payload){
-    let post = state.posts.find(post => post.id === payload.id)
+    let post = state.posts.find(post => post.slug === payload.slug)
     post.is_live = payload.state
   },
   UPDATE_POST(state, payload){
-    state.posts[state.posts.findIndex(post => post.id === payload.id)] = payload
+    state.posts[state.posts.findIndex(post => post.slug === payload.slug)] = payload
   },
   DELETE_POST(state, payload){
-    let postIndex = state.posts.findIndex(post => post.id === payload.id)
+    let postIndex = state.posts.findIndex(post => post.slug === payload.slug)
+
     state.posts.splice(postIndex, 1)
 
     if(state.totalPosts > 0){
@@ -78,22 +79,22 @@ export const actions = {
     commit('SET_PER_PAGE', payload)
   },
   postStatus({commit}, payload){
-    if(payload && payload.hasOwnProperty('id') && payload.hasOwnProperty('state')){
+    if(payload && payload.hasOwnProperty('slug') && payload.hasOwnProperty('state')){
       commit('SET_POST_STATUS', payload);
     }
   },
   deletePost({commit}, payload){
-    if(payload && payload.hasOwnProperty('id')){
+    if(payload && payload.hasOwnProperty('slug')){
       commit('DELETE_POST', payload);
     }
   },
   savePost({commit}, payload){
-    if(payload && payload.hasOwnProperty('id')){
+    if(payload && payload.hasOwnProperty('slug')){
       commit('SET_POST', payload);
     }
   },
   updatePost({commit}, payload){
-    if(payload && payload.hasOwnProperty('id')){
+    if(payload && payload.hasOwnProperty('slug')){
       commit('UPDATE_POST', payload)
     }
   },
@@ -106,13 +107,14 @@ export const actions = {
 }
 
 const sortPosts = (state, payload, sortKey = null) => {
+  console.log(payload)
   switch(sortKey) {
     case "acs_id":
       state.currentSortKey = 'acs_id'
-      state.posts = payload.sort((a, b) => Number(a.id) - Number(b.id));
+      state.posts = payload.sort((a, b) => new Date(a.updated_at_dates.updated_at_sort) - new Date(b.updated_at_dates.updated_at_sort));
       break;
     default://desc ID
       state.currentSortKey = null
-      state.posts = payload.sort((a, b) => Number(b.id) - Number(a.id));
+      state.posts = payload.sort((a, b) => new Date(b.updated_at_dates.updated_at_sort) - new Date(a.updated_at_dates.updated_at_sort));
   }
 }
