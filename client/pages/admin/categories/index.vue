@@ -189,9 +189,7 @@
               w-12
               rounded-full
               bg-red-100
-              sm:mx-0
-              sm:h-10
-              sm:w-10
+              sm:mx-0 sm:h-10 sm:w-10
             "
           >
             <svg
@@ -294,7 +292,6 @@ export default {
         deleteCategory: false,
       },
       deleteCategorySlug: String,
-      deleteCategoryId: Number,
       modalSubmitting: false,
       categoryTitle: '',
       categorySlug: '',
@@ -306,16 +303,14 @@ export default {
       this.setModalStatus('addCategory', true);
     },
 
-    editCategoryModalOpen(id, slug, title) {
+    editCategoryModalOpen(slug, title) {
       this.setModalStatus('editCategory', true);
       this.categoryTitle = title;
       this.categorySlug = slug;
-      this.categoryId = id;
     },
 
-    deleteCategoryModalOpen(id, slug) {
+    deleteCategoryModalOpen(slug) {
       this.setModalStatus('deleteCategory', true);
-      this.deleteCategoryId = id;
       this.deleteCategorySlug = slug;
     },
 
@@ -372,7 +367,7 @@ export default {
       try {
         await agent.Categories.delete(this.deleteCategorySlug);
         this.$store.dispatch('admin/admin-categories/deleteCategory', {
-          id: this.deleteCategoryId,
+          slug: this.deleteCategorySlug,
         });
         this.setModalStatus('deleteCategory', false);
       } catch (error) {
@@ -406,13 +401,19 @@ export default {
       };
 
       try {
-        const editCategory = await agent.Categories.update(
+        const latestCategoryData = await agent.Categories.update(
           this.categorySlug,
           formData
         );
+
+        let categoryData = {
+          latestData: latestCategoryData,
+          oldSlug: this.categorySlug,
+        };
+
         this.$store.dispatch(
           'admin/admin-categories/updateCategory',
-          editCategory
+          categoryData
         );
         this.setModalStatus('editCategory', false);
       } catch (error) {

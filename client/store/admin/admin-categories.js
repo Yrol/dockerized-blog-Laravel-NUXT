@@ -28,11 +28,11 @@ export const mutations = {
   },
 
   UPDATE_CATEGORY(state, payload){
-    state.categories[state.categories.findIndex(category => category.id === payload.id)] = payload
+    state.categories[state.categories.findIndex(category => category.slug === payload.oldSlug)] = payload.latestData
   },
 
   DELETE_CATEGORY(state, payload) {
-    let categoryIndex = state.categories.findIndex(category => category.id === payload.id)
+    let categoryIndex = state.categories.findIndex(category => category.slug === payload.slug)
     state.categories.splice(categoryIndex, 1)
 
     if(state.totalCategories > 0){
@@ -50,15 +50,18 @@ export const actions = {
   },
 
   saveCategory({commit}, payload){
-    commit('SET_CATEGORY', payload);
+    if(payload && payload.hasOwnProperty('slug')){
+      commit('SET_CATEGORY', payload);
+    }
   },
 
   updateCategory({commit}, payload){
+    if(payload.latestData && payload.latestData.hasOwnProperty('slug'))
     commit('UPDATE_CATEGORY', payload);
   },
 
   deleteCategory({commit}, payload){
-    if(payload && payload.hasOwnProperty('id')){
+    if(payload && payload.hasOwnProperty('slug')){
       commit('DELETE_CATEGORY', payload);
     }
   },
@@ -73,10 +76,10 @@ const sortCategories = (state, payload, sortKey = null) => {
   switch(sortKey) {
     case "acs_id":
       state.currentSortKey = 'acs_id'
-      state.categories = payload.sort((a, b) => Number(a.id) - Number(b.id));
+      state.categories = payload.sort((a, b) => new Date(a.updated_at_dates.updated_at_format_1) - new Date(b.updated_at_dates.updated_at_format_1));
       break;
     default://desc ID
       state.currentSortKey = null
-      state.categories = payload.sort((a, b) => Number(b.id) - Number(a.id));
+      state.categories = payload.sort((a, b) => new Date(b.updated_at_dates.updated_at_format_1) - new Date(a.updated_at_dates.updated_at_format_1));
   }
 }

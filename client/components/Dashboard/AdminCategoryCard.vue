@@ -51,27 +51,38 @@
         >
           <div class="text-sm justify-center">
             <p
-              class="text-black mb-3 leading-none w-12 h-2 animate-pulse bg-gray-400"
+              class="
+                text-black
+                mb-3
+                leading-none
+                w-12
+                h-2
+                animate-pulse
+                bg-gray-400
+              "
             ></p>
             <p class="text-grey-dark animate-pulse w-12 h-2 bg-gray-400"></p>
           </div>
         </div>
         <div
           v-if="dataReady"
-          class="flex flex-wrap mt-4 justify-end content-end border-8:transparent w-full md:w-1/2 lg:w-2/4"
+          class="
+            flex flex-wrap
+            mt-4
+            justify-end
+            content-end
+            border-8:transparent
+            w-full
+            md:w-1/2
+            lg:w-2/4
+          "
         >
           <Button
             variant="primary"
             :loading="false"
             size="small"
             icon="edit"
-            @click="
-              editCategory(
-                categoryData.id,
-                categoryData.slug,
-                categoryData.title
-              )
-            "
+            @click="editCategory(categoryData.slug, categoryData.title)"
           >
           </Button>
           <Button
@@ -79,7 +90,7 @@
             :loading="false"
             size="small"
             icon="trash-alt"
-            @click="deleteCategory(categoryData.id, categoryData.slug)"
+            @click="deleteCategory(categoryData.slug)"
           >
           </Button>
         </div>
@@ -104,12 +115,12 @@ export default {
     },
   },
   methods: {
-    editCategory(slug, id, title) {
-      this.$emit('edit-category', slug, id, title);
+    editCategory(slug, title) {
+      this.$emit('edit-category', slug, title);
     },
 
-    deleteCategory(slug, id) {
-      this.$emit('delete-category', slug, id);
+    deleteCategory(slug) {
+      this.$emit('delete-category', slug);
     },
   },
 };
