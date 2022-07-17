@@ -473,6 +473,14 @@ http://<your-server-ip>
 http://<your-server-ip>/api
 ```
 
+## Re-deploying the application
+
+The following need to performed in order to reflect new changes (both frontend and backend) in the existing application (or unless the deployments are not automated).
+
+```
+make deploy-apps
+```
+
 ## Adding SSL with LetsEncrypt
 
 ```
