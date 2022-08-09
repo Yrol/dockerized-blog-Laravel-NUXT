@@ -475,7 +475,7 @@ http://<your-server-ip>/api
 
 ## Re-deploying the application
 
-The following need to performed in order to reflect new changes (both frontend and backend) in the existing application (or unless the deployments are not automated).
+The following need to be performed in order to reflect new changes (both frontend and backend) in the existing application (unless the deployments are not automated via a pipeline).
 
 ```
 make deploy-apps
