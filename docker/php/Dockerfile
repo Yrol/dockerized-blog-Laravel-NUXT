@@ -34,8 +34,8 @@ RUN docker-php-ext-install bcmath
 
 # Human Language and Character Encoding Support
 RUN apt-get install -y zlib1g-dev libicu-dev g++ \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+  && docker-php-ext-configure intl \
+  && docker-php-ext-install intl
 
 # PHP Redis extension
 RUN pecl install redis
@@ -43,6 +43,7 @@ RUN docker-php-ext-enable redis
 
 # Custom php.ini config
 COPY php.ini /usr/local/etc/php/php.ini
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Install Xdebug
 RUN pecl install xdebug
